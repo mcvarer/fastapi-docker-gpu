@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  api:
+    image: nvidia/cuda:11.4-base
+    build: .
+    container_name: fastapi-application
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      PORT: 8000
+    ports:
+      - '8000:8000'
